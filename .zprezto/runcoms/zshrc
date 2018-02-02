@@ -1,0 +1,35 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH=${PATH}:/home/seun/Android/Sdk/tools
+export PATH=${PATH}:/home/seun/Android/Sdk/platform-tools
+export ANDROID_HOME=$HOME/Android/Sdk
+PATH=$ANDROID_HOME/emulator:$PATH
+
+# Aliases
+alias rn="react-native run-android && react-native start"
+alias rns="react-native start"
+alias rnlog="react-native log-android"
+alias rnlink="react-native link"
+alias resetbt="~/bluetooth/resetBluetooth"
+alias git="hub"
+
+fpath=(~/.zsh/completions $fpath) 
+autoload -U compinit && compinit
+
+function avd { cd "$(dirname "$(which emulator)")" && ./emulator "$@"; }
